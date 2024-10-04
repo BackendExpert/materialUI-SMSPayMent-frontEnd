@@ -2,8 +2,14 @@ import React, { useState } from 'react'
 import SchoolIMG from '../assets/SchoolLogin.png'
 import FormButton from '../components/FormButton'
 import TextFeildInput from '../components/TextFeildInput'
+import axios from 'axios'
+import { useAuth } from '../Protected/AuthContext';
+import { useNavigate } from 'react-router-dom'
+
 
 const SignIn = () => {
+    const { login } = useAuth();
+    const navigate = useNavigate()
     const [SignInData, SetSignInData] = useState({
         email: '',
         password: '',
@@ -21,13 +27,14 @@ const SignIn = () => {
     const headleSignIn = async (e) => {
         e.preventDefault()
         try{
-            const res = await axios.post(import.meta.env.VITE_APP_API + `/auth/Login/`, LoginData)
+            const res = await axios.post(import.meta.env.VITE_APP_API + `/auth/Login/`, SignInData)
             .then(res => {
                 if(res.data.Status === "Success"){
                     alert("Login Success");
-                    localStorage.setItem('token', res.data.token); 
-                    secureLocalStorage.setItem('Login1', res.data.user.email);      
-                    secureLocalStorage.setItem('Login2', res.data.user.role);
+                    // localStorage.setItem('token', res.data.token); 
+                    // secureLocalStorage.setItem('Login1', res.data.user.email);      
+                    // secureLocalStorage.setItem('Login2', res.data.user.role);
+                    login(res.data.token, res.data.user.email, res.data.user.role);
                     navigate('/Dashboard');
                 }
                 else{

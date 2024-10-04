@@ -1,25 +1,20 @@
 import { createContext, useContext, useEffect, useState } from 'react';
+import  secureLocalStorage  from  "react-secure-storage";
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [authToken, setAuthToken] = useState(null);
 
-
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      setAuthToken(token);
-    }
-  }, []);
-
-  const login = (token) => {
+  const login = (token, Email, Role) => {
     localStorage.setItem('token', token);
+    secureLocalStorage.setItem('Login1', Email);      
+    secureLocalStorage.setItem('Login2', Role);
     setAuthToken(token);
   };
 
   const logout = () => {
-    localStorage.removeItem('token');
+    localStorage.clear();
     setAuthToken(null);
   };
 
