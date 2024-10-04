@@ -22,9 +22,7 @@ const SignIn = () => {
                         <TextFeildInput InputType={"password"} PlaceText={"Password"} TextColor={"#6C63FF"} BorderColor={"#6C63FF"}/>
                     </div>
 
-                    <FormButton ButtonText={"SignIn"} />
-
-                    
+                    <FormButton ButtonText={"SignIn"} TypeButton={"submit"}/>                    
                 </form>
             </div>
             <div className=""></div>

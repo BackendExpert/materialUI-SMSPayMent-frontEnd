@@ -1,9 +1,10 @@
 import React from 'react'
 import { Button } from '@mui/material'
 
-const FormButton = ({ ButtonText }) => {
+const FormButton = ({ ButtonText, TypeButton }) => {
   return (
     <Button 
+        type={TypeButton}
         variant="contained" 
         className='w-full h-12'
         sx={{ 
