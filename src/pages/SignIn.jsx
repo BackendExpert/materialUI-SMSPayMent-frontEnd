@@ -18,10 +18,26 @@ const SignIn = () => {
     };
 
       
-    const headleSignIn = (e) => {
+    const headleSignIn = async (e) => {
         e.preventDefault()
-
-        console.log('Form Data:', SignInData);
+        try{
+            const res = await axios.post(import.meta.env.VITE_APP_API + `/auth/Login/`, LoginData)
+            .then(res => {
+                if(res.data.Status === "Success"){
+                    alert("Login Success");
+                    localStorage.setItem('token', res.data.token); 
+                    secureLocalStorage.setItem('Login1', res.data.user.email);      
+                    secureLocalStorage.setItem('Login2', res.data.user.role);
+                    navigate('/Dashboard');
+                }
+                else{
+                    alert(res.data.Error)
+                }
+            })
+        }
+        catch(err){
+            console.log(err)
+        }
     }
   return (
     <div className='bg-[#6C63FF] w-full min-h-screen md:py-[10%] py-[20%]'>
