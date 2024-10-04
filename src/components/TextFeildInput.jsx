@@ -1,13 +1,13 @@
 import React from 'react'
 import { TextField } from '@mui/material'
 
-const TextFeildInput = ({ InputType, PlaceText, TextColor, BorderColor, value, onChange }) => {
+const TextFeildInput = ({ InputType, PlaceText, TextColor, BorderColor, value, onChange, name }) => {
   return (
     <TextField
-        id="outlined-basic"
         label={PlaceText}
         type={InputType}
         value={value}
+        name={name}
         onChange={onChange}
         variant="outlined"
         className="w-full"
